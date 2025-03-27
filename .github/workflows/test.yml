@@ -1,0 +1,25 @@
+name: Build and Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fetch configuration
+        uses: gbraad-actions/shared-config@v1
+        with:
+          config_repo: https://github.com/gbraad/shared-config.git
+          config_file: ${{ github.repository_owner }}/${{ github.repository }}/test.ini
+
+      - name: Use test settings
+        run: |
+          echo "Author: $TEST_NAME $TEST_EMAIL"
+        shell: bash
+
+      - name: Use test settings
+        run: |
+          echo "Author: ${{ env.TEST_NAME }} ${{ env.TEST_EMAIL }}"
+        shell: bash
