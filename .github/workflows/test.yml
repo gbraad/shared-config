@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Fetch configuration
-        uses: gbraad-actions/shared-config@v1
+        uses: gbraad-actions/shared-config@v2
         with:
           config_repo: https://github.com/gbraad/shared-config.git
           config_file: ${{ github.repository }}/test.ini
@@ -22,4 +22,17 @@ jobs:
       - name: Use quoted settings
         run: |
           echo "Author: ${{ env.QUOTED_NAME }} ${{ env.QUOTED_EMAIL }}"
+        shell: bash
+
+      - name: Fetch configuration and use output
+        id: shared-config
+        uses: gbraad-actions/shared-config@v2
+        with:
+          config_repo: https://github.com/gbraad/shared-config.git
+          config_file: ${{ github.repository }}/test-output.ini
+          use_output: true
+
+      - name: Use test and test-output settings
+        run: |
+          echo "Contact: $TEST_EMAIL or ${{ steps.shared-config.outputs.TEST_EMAIL }}"
         shell: bash
