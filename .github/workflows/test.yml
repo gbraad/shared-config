@@ -34,5 +34,5 @@ jobs:
 
       - name: Use test and test-output settings
         run: |
-          echo "Contact ${{ steps.config.outputs.TEST_NAME }} at $TEST_EMAIL or ${{ steps.config.outputs.TEST_EMAIL }}"
+          echo "Contact ${{ steps.config.outputs.test_name }} at $TEST_EMAIL or ${{ steps.config.outputs.test_email }}"
         shell: bash
